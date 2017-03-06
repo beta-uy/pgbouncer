@@ -1,14 +1,14 @@
-FROM alpine:latest
+FROM debian:jessie
 
-RUN apk add --no-cache ca-certificates wget alpine-sdk libevent-dev openssl-dev
+# via https://github.com/Kotaimen/docker-pgbouncer/blob/develop/Dockerfile
+RUN set -x \
+ && apt-get -qq update \
+ && apt-get install -yq --no-install-recommends libevent-dev libudns-dev \
+ && apt-get install -yq --no-install-recommends python pgbouncer \
+ && apt-get purge -y --auto-remove \
+ && rm -rf /var/lib/apt/lists/*
 
-RUN wget https://pgbouncer.github.io/downloads/files/1.7.2/pgbouncer-1.7.2.tar.gz \
- && tar -vxzf pgbouncer-1.7.2.tar.gz
-
-RUN cd pgbouncer-1.7.2 && ./configure --prefix=/usr/local && make && make install
-RUN rm /pgbouncer-1.7.2.tar.gz
-
-RUN adduser -S -D pgbouncer
+RUN adduser --system --disabled-password pgbouncer
 
 RUN mkdir -p /etc/pgbouncer/templates
 RUN chown pgbouncer /etc/pgbouncer
