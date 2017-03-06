@@ -1,0 +1,11 @@
+[databases]
+$dbname = host=$host port=$target_port dbname=$dbname
+
+[pgbouncer]
+listen_port = $source_port
+listen_addr = *
+auth_type = md5
+auth_file = /etc/pgbouncer/users.txt
+logfile = /etc/pgbouncer/pgbouncer.log
+pidfile = /etc/pgbouncer/pgbouncer.pid
+server_tls_sslmode=prefer
