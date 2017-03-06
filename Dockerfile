@@ -1,11 +1,11 @@
 FROM alpine:latest
 
-RUN apk add --no-cache ca-certificates wget alpine-sdk libevent-dev openssl-dev
+RUN apk add --no-cache alpine-sdk libevent-dev openssl-dev c-ares
 
 RUN wget https://pgbouncer.github.io/downloads/files/1.7.2/pgbouncer-1.7.2.tar.gz \
  && tar -vxzf pgbouncer-1.7.2.tar.gz
 
-RUN cd pgbouncer-1.7.2 && ./configure --prefix=/usr/local && make && make install
+RUN cd pgbouncer-1.7.2 && ./configure --prefix=/usr/local --with-cares=/usr/lib && make && make install
 RUN rm /pgbouncer-1.7.2.tar.gz
 
 RUN adduser -S -D pgbouncer
