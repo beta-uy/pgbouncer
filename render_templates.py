@@ -22,8 +22,8 @@ pgbouncer_ini.write(pgbouncer_ini_body)
 pgbouncer_ini.close()
 
 # Generate users.txt
-username    = os.environ['DATABASE_USER']
-password    = os.environ['DATABASE_PASSWORD']
+username    = os.environ['POSTGRES_USER']
+password    = os.environ['POSTGRES_PASSWORD']
 
 users_txt_tmpl = open('/etc/pgbouncer/templates/users.txt.tmpl', 'r').read()
 users_txt_body = (

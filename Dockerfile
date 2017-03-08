@@ -1,5 +1,8 @@
 FROM debian:jessie
 
+# Using c-ares: https://pgbouncer.github.io/install.html#dns-lookup-support
+# to solve: http://lists.pgfoundry.org/pipermail/pgbouncer-general/2012-September/001038.html
+
 # via https://github.com/pgbouncer/pgbouncer/issues/122#issuecomment-199182461 
 # Install build deps, build and cleanup in one shot
 RUN apt-get update \
