@@ -3,8 +3,8 @@ $dbname = host=$host port=$target_port dbname=$dbname
 
 [pgbouncer]
 pool_mode = transaction
-max_client_conn = 200
-default_pool_size = 100
+max_client_conn = $max_client_conn 
+default_pool_size = $default_pool_size
 listen_port = $source_port
 listen_addr = *
 auth_type = md5

@@ -2,10 +2,12 @@ import os
 from string import Template
 
 # Generate pgbouncer.ini
-dbname      = os.environ['DATABASE_NAME']
-host        = os.environ['DATABASE_HOST']
-source_port = os.environ.get('SOURCE_PORT', 5432)
-target_port = os.environ.get('TARGET_PORT', 5432)
+dbname            = os.environ['DATABASE_NAME']
+host              = os.environ['DATABASE_HOST']
+source_port       = os.environ.get('SOURCE_PORT', 5432)
+target_port       = os.environ.get('TARGET_PORT', 5432)
+max_client_conn   = os.environ.get('MAX_CLIENT_CONN', 1000)
+default_pool_size = os.environ.get('DEFAULT_POOL_SIZE', 100)
 
 pgbouncer_ini_tmpl = open('/etc/pgbouncer/templates/pgbouncer.ini.tmpl', 'r').read()
 pgbouncer_ini_body = (
@@ -14,7 +16,9 @@ pgbouncer_ini_body = (
         dbname = dbname,
         host = host,
         source_port = source_port,
-        target_port = target_port
+        target_port = target_port,
+        max_client_conn = max_client_conn,
+        default_pool_size = default_pool_size
     )
 )
 pgbouncer_ini = open('/etc/pgbouncer/pgbouncer.ini', 'w')
